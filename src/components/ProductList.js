@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts } from '../actions/productActions';
-import { addToCart } from '../actions/cartActions';
+import { setProducts } from '../actions/productActions.js';
+import { addToCart } from '../actions/cartActions.js';
 
 const ProductList = () => {
   const dispatch = useDispatch();

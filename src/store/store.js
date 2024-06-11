@@ -1,14 +1,14 @@
-import { createStore, combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import cartReducer from '../reducers/cartReducer';
-import productReducer from '../reducers/productReducer';
+import cartReducer from '../reducers/cartReducer.js';
+import productReducer from '../reducers/productReducer.js';
 
-const rootReducer = combineReducers({
-  cart: cartReducer,
-  products: productReducer,
+const store = configureStore({
+  reducer: {
+    cart: cartReducer,
+    products: productReducer,
+  },
 });
-
-const store = createStore(rootReducer);
 
 const ReduxProvider = ({ children }) => (
   <Provider store={store}>
@@ -17,3 +17,4 @@ const ReduxProvider = ({ children }) => (
 );
 
 export default ReduxProvider;
+

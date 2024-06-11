@@ -92,10 +92,10 @@
 
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
-import ProductList from './components/ProductList';
-import Cart from './components/Cart';
-import Register from './components/Register';
-import Login from './components/Login';
+import ProductList from './components/ProductList.js';
+import Cart from './components/Cart.js';
+import Register from './components/Register.js';
+import Login from './components/Login.js';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -117,7 +117,7 @@ const App = () => {
   return (
     <Router>
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
           <div className="container">
             <Link className="navbar-brand" to="/">Redux Store</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
