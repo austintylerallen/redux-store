@@ -50,9 +50,9 @@ Redux Store is a responsive e-commerce platform built with React and Redux. The 
 
 ## Screenshots
 
-![Home Page](path/to/screenshot1.png)
-![Product Page](path/to/screenshot2.png)
-![Cart Page](path/to/screenshot3.png)
+![Register Page](redux3.png)
+![Login Page](redux2.png)
+![Cart Page](redux1.png)
 
 ## Live Demo
 
