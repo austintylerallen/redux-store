@@ -1,20 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { Provider } from 'react-redux';
-import cartReducer from '../reducers/cartReducer.js';
 import productReducer from '../reducers/productReducer.js';
+import cartReducer from '../reducers/cartReducer.js';
 
 const store = configureStore({
   reducer: {
-    cart: cartReducer,
     products: productReducer,
+    cart: cartReducer,
   },
 });
 
-const ReduxProvider = ({ children }) => (
-  <Provider store={store}>
-    {children}
-  </Provider>
-);
-
-export default ReduxProvider;
-
+export default store;

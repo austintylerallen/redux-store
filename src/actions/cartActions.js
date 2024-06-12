@@ -1,19 +1,21 @@
+import { v4 as uuidv4 } from 'uuid'; // Import UUID
+
 export const addToCart = (product) => {
   return {
-    type: 'ADD_TO_CART',
-    payload: product,
+    type: 'cart/addToCart',
+    payload: { ...product, cartItemId: uuidv4() }, // Add a unique identifier
   };
 };
 
-export const removeFromCart = (productId) => {
+export const removeFromCart = (cartItemId) => {
   return {
-    type: 'REMOVE_FROM_CART',
-    payload: productId,
+    type: 'cart/removeFromCart',
+    payload: cartItemId,
   };
 };
 
 export const clearCart = () => {
   return {
-    type: 'CLEAR_CART',
+    type: 'cart/clearCart',
   };
 };

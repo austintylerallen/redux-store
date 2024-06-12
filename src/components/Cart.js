@@ -1,37 +1,51 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeFromCart, clearCart } from '../actions/cartActions.js';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart, clearCart } from '../reducers/cartReducer.js'; // Updated import path
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const cartItems = useSelector(state => state.cart.cartItems);
-  const [isCheckedOut, setIsCheckedOut] = useState(false);
+  const cart = useSelector(state => state.cart);
 
-  const total = cartItems.reduce((acc, item) => acc + item.price, 0);
-
-  const handleCheckout = () => {
-    setIsCheckedOut(true);
-    dispatch(clearCart());
-  };
-
-  return (
-    <div>
-      <ul className="list-group mb-4">
-        {cartItems.map(item => (
-          <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
-            <span>{item.name} - ${item.price.toFixed(2)}</span>
-            <button className="btn btn-danger btn-sm" onClick={() => dispatch(removeFromCart(item.id))}>Remove</button>
-          </li>
-        ))}
-      </ul>
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">Total</h5>
-          <p className="card-text">${total.toFixed(2)}</p>
-          <button className="btn btn-success" onClick={handleCheckout}>Checkout</button>
+  if (!cart || cart.length === 0) {
+    return (
+      <div className="container my-4">
+        <div className="card">
+          <div className="card-body">Your cart is empty</div>
         </div>
       </div>
-      {isCheckedOut && <div className="alert alert-success mt-4">Thank you for your purchase!</div>}
+    );
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+  return (
+    <div className="container my-4">
+      <div className="card mb-4">
+        <div className="card-body">
+          {cart.map(item => (
+            <div key={item.cartItemId} className="d-flex justify-content-between align-items-center mb-2">
+              <div>
+                <p className="mb-0"><strong>{item.name}</strong></p>
+                <p className="mb-0">${item.price.toFixed(2)}</p>
+              </div>
+              <button
+                className="btn btn-danger"
+                onClick={() => dispatch(removeFromCart(item.cartItemId))}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="card">
+        <div className="card-body d-flex justify-content-between align-items-center">
+          <p className="mb-0"><strong>Total: ${total.toFixed(2)}</strong></p>
+          <button className="btn btn-danger" onClick={() => dispatch(clearCart())}>
+            Clear Cart
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

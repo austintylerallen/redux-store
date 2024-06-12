@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts } from '../actions/productActions.js';
-import { addToCart } from '../actions/cartActions.js';
+import { setProducts } from '../reducers/productReducer.js'; // Added .js extension
+import { addToCart } from '../reducers/cartReducer.js'; // Added .js extension
 
 const ProductList = () => {
   const dispatch = useDispatch();
-  const products = useSelector(state => state.products.products);
+  const products = useSelector(state => state.products);
 
   useEffect(() => {
     const fetchedProducts = [
@@ -16,22 +16,24 @@ const ProductList = () => {
   }, [dispatch]);
 
   return (
-    <div className="row">
-      {products.map(product => (
-        <div key={product.id} className="col-md-6 mb-4">
-          <div className="card h-100 shadow-sm">
-            <img src={product.imageUrl} className="card-img-top" alt={product.name} />
-            <div className="card-body d-flex flex-column">
-              <h5 className="card-title">{product.name}</h5>
-              <p className="card-text">{product.description}</p>
-              <div className="mt-auto">
-                <p className="text-success"><strong>${product.price.toFixed(2)}</strong></p>
-                <button className="btn btn-primary" onClick={() => dispatch(addToCart(product))}>Add to Cart</button>
+    <div className="container my-4">
+      <div className="row">
+        {products.map(product => (
+          <div key={product.id} className="col-md-6 mb-4">
+            <div className="card h-100 shadow-sm">
+              <img src={product.imageUrl} className="card-img-top" alt={product.name} />
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">{product.description}</p>
+                <div className="mt-auto">
+                  <p className="text-success"><strong>${product.price.toFixed(2)}</strong></p>
+                  <button className="btn btn-primary" onClick={() => dispatch(addToCart(product))}>Add to Cart</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
